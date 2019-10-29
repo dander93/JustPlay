@@ -1,3 +1,43 @@
+var diccionario = {
+    '.-': 'A',
+    '-..': 'B',
+    '-.-.': 'C',
+    '-..': 'D',
+    '.': 'E',
+    '..-.': 'F',
+    '--.': 'G',
+    '....': 'H',
+    '..': 'I',
+    '.---': 'J',
+    '-.-': 'K',
+    '.-..': 'L',
+    '--': 'M',
+    '-.': 'N',
+    '---': 'O',
+    '.--.': 'P',
+    '--.-': 'Q',
+    '.-.': 'R',
+    '...': 'S',
+    '-': 'T',
+    '..-': 'U',
+    '...-': 'V',
+    '.--': 'W',
+    '-..-': 'X',
+    '-.--': 'Y',
+    '--..': 'Z',
+    '-----': '0',
+    '.----': '1',
+    '..---': '2',
+    '...--': '3',
+    '....-': '4',
+    '.....': '5',
+    '-....': '6',
+    '--...': '7',
+    '---..': '8',
+    '----.': '9',
+    '.-.-.-': 'Fullstop (period)'
+}
+
 $(document).ready(function () {
     var text = $('#toParse').text();
     text = text.split('');
@@ -17,7 +57,7 @@ function decodeBits2Morse(text) {
         }
         else {
             var j = i;
-            while(text[j] == 0){
+            while (text[j] == 0) {
                 space++;
                 j++;
             }
@@ -29,7 +69,7 @@ function decodeBits2Morse(text) {
                 arrMsg.push('-');
             }
         }
-        if(space > 2)
+        if (space > 2)
             arrMsg.push(' ');
         cont = 0;
         space = 0;
@@ -38,5 +78,16 @@ function decodeBits2Morse(text) {
 }
 
 function translate2Human(arrMsg) {
-    console.log(arrMsg.join(''));
+    var out = '';
+    $('#hereToMorse').text(arrMsg.join(''));
+
+    arrMsg = arrMsg.join('');
+    arrMsg = arrMsg.trim().split(' ')
+
+    for (let i = 0; i < arrMsg.length; i++) {
+        if (diccionario[arrMsg[i]])
+            out += diccionario[arrMsg[i]];
+    }
+    $('#hereToHuman').text(out)
 }
+
